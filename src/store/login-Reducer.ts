@@ -1,21 +1,18 @@
 import {Dispatch} from "redux";
-import {api} from "../api/api";
+import {loginAPI} from "../api/loginAPI";
+import {setProfileDataTC} from "./profile-Reducer";
 
-const LOG_UP = 'LOG_UP'
-export const initState = {
-    mail: '',
-    password: '',
-    checkBox: true
+
+export const authInitState = {
+    isLoggedIn: false
 }
 
-export const LoginReducer = (state: InitStateType = initState, action: ActionType) => {
+export const authReducer = (state: InitStateAuthType = authInitState, action: ActionType) => {
     switch (action.type) {
-        case LOG_UP: {
+        case 'login/SET-IS-LOGGED-IN': {
             return {
                 ...state,
-                mail: action.mail,
-                password: action.password,
-                checkBox: action.checkBox,
+                isLoggedIn: action.value
             }
         }
         default:
@@ -23,15 +20,26 @@ export const LoginReducer = (state: InitStateType = initState, action: ActionTyp
     }
 }
 //Actions
-const logUpAC = (mail: string, password: string, checkBox: boolean,) =>
-    ({type: 'LOG_UP', mail, password, checkBox} as const)
+const setIsLoggedInAC = (value: boolean) =>
+    ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
 //Thunk
-export const logUpTC = (mail: string, password: string, checkBox: boolean,) => (dispatch: Dispatch) => {
-    api.logUp(mail, password, checkBox).then()
-    dispatch(logUpAC(mail, password, checkBox))
+export const logUpTC = ( email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch<any>) => {
+    loginAPI.logUp(email, password, rememberMe).then((res) => {
+            if (res.data._id) {
+                dispatch(setIsLoggedInAC(true))
+                // dispatch(setProfileDataTC(res.data))
+            }
+        }
+    )
+        .catch((e) => {
+            console.log(' more details in the console')
+                const error = e.response ? e.response.data.error : (e.message + ', more details in the console')
+            }
+        )
+
 }
 
 //Types
-type ActionType = ReturnType<typeof logUpAC>
-type InitStateType = typeof initState
+type ActionType = ReturnType<typeof setIsLoggedInAC>
+export type InitStateAuthType = typeof authInitState

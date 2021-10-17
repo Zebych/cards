@@ -1,39 +1,50 @@
-import React, {ChangeEvent, useCallback, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import SuperButton from "./SuperComponents/SuperButton/SuperButton";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {logUpTC} from "../store/login-Reducer";
+import {Redirect} from "react-router-dom";
+import {AppRootStateType} from "../store/store";
+import {setProfileDataTC} from "../store/profile-Reducer";
 
 export const Login = () => {
-    const [mail, setMail] = useState('')
+    const [email, setMail] = useState('')
     const [password, setPassword] = useState('')
     const [checkBox, setCheckBox] = useState(true)
     const dispatch = useDispatch()
-
-    const onChangeMail = useCallback(
-        (e: ChangeEvent<HTMLInputElement>) => {
-            return setMail(e.currentTarget.value)
-        }, [mail]
-    )
-    const onChangePassword = useCallback(
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+    useEffect(() => {
+        debugger
+        if (!isLoggedIn) {
+            return
+        }
+        dispatch(setProfileDataTC())
+    }, [isLoggedIn])
+    const onChangeMail = (e: ChangeEvent<HTMLInputElement>) => {
+        return setMail(e.currentTarget.value)
+    }
+    const onChangePassword =
         (e: ChangeEvent<HTMLInputElement>) => {
             return setPassword(e.currentTarget.value)
-        }, [password]
-    )
-    const changeCheckedBox = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+        }
+    const changeCheckedBox = (e: ChangeEvent<HTMLInputElement>) => {
         return setCheckBox(e.currentTarget.checked)
-    }, [checkBox])
+    }
 
     const logUp = () => {
-        dispatch(logUpTC(mail, password, checkBox))
+        dispatch(logUpTC(email, password, checkBox))
         setMail('')
         setPassword('')
         setCheckBox(true)
     }
 
+    if (isLoggedIn) {
+        return <Redirect to={'/'}/>
+    }
+
     return (
         <div>
             <div>
-                <input onChange={onChangeMail} value={mail}/>
+                <input onChange={onChangeMail} value={email}/>
             </div>
             <div>
                 <input type="text" onChange={onChangePassword} value={password}/>
