@@ -1,5 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import SuperButton from "../SuperComponents/SuperButton/SuperButton";
+import s from "./login.module.css"
+import SuperInputText from "../SuperComponents/SuperInputText/SuperInputText";
+import SuperCheckbox from "../SuperComponents/SuperCheckbox/SuperCheckbox";
 
 type LoginPropsType = {
     logUp: () => void
@@ -32,19 +35,24 @@ export const Login: React.FC<LoginPropsType> = ({
     }
 
     return (
-        <div>
-            <div>
-                <input onChange={onChangeMailHandler} value={email}/>
+        <div className={s.container}>
+            <div className={s.wrapper}>
+                email:
+                <SuperInputText onChange={onChangeMailHandler} value={email}/>
+                password:
+                <SuperInputText type={"password"} onChange={onChangePasswordHandler} value={password}/>
+
+                <div>
+                    <span>remember me</span>
+                    <SuperCheckbox checked={checkBox} onChange={changeCheckedBoxHandler}/>
+                </div>
+
             </div>
-            <div>
-                <input type="text" onChange={onChangePasswordHandler} value={password}/>
-            </div>
-            <div>
-                <span onClick={toRegister}>register</span>
-                <input type="checkbox" checked={checkBox} onChange={changeCheckedBoxHandler}/>
+            <span onClick={toRegister}>registration</span>
+            <div className={s.button}>
+                <SuperButton onClick={logUp} buttonName={'Log up'}/>
             </div>
 
-            <SuperButton onClick={logUp}/>
         </div>
     )
 }
