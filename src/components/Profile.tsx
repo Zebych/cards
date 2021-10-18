@@ -6,7 +6,7 @@ import {ResponseLogUpType} from "../api/loginAPI";
 
 export const Profile = () => {
     const profileData=useSelector<AppRootStateType,ResponseLogUpType>(state=>state.profile)
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
     if (!isLoggedIn) {
         return <Redirect to={'/login'}/>
     }

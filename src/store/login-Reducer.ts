@@ -1,6 +1,5 @@
 import {Dispatch} from "redux";
 import {loginAPI} from "../api/loginAPI";
-import {setProfileDataTC} from "./profile-Reducer";
 
 
 export const authInitState = {
@@ -28,7 +27,6 @@ export const logUpTC = ( email: string, password: string, rememberMe: boolean) =
     loginAPI.logUp(email, password, rememberMe).then((res) => {
             if (res.data._id) {
                 dispatch(setIsLoggedInAC(true))
-                // dispatch(setProfileDataTC(res.data))
             }
         }
     )

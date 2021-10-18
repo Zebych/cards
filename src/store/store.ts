@@ -5,7 +5,7 @@ import thunk from "redux-thunk";
 import {profileReducer} from "./profile-Reducer";
 
 const RootReducer = combineReducers({
-    login: authReducer,
+    auth: authReducer,
     profile:profileReducer,
     // register: RegisterReducer,
 })

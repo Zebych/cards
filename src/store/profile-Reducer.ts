@@ -22,7 +22,6 @@ export const initState: InitStateType = {
 export const profileReducer = (state = initState, action: ActionType) => {
     switch (action.type) {
         case 'login/SET_PROFILE_DATA': {
-            debugger
             return {
                 ...state,
                 _id: action.profileData._id,
@@ -49,10 +48,8 @@ const setProfileDataAC = (profileData: ResponseLogUpType) =>
     ({type: 'login/SET_PROFILE_DATA', profileData} as const)
 
 //Thunk
-export const setProfileDataTC = () => (dispatch: Dispatch) => {
-    debugger
+export const getProfileDataTC = () => (dispatch: Dispatch) => {
     loginAPI.me().then((res) => {
-        debugger
         dispatch(setProfileDataAC(res.data))
     })
 
