@@ -1,8 +1,8 @@
 import {Dispatch} from "redux";
-import {loginAPI, ResponseLogUpType} from "../api/loginAPI";
+import {authAPI, ResponseType} from "../api/authAPI";
 
 
-export const initState: InitStateType = {
+export const initState: InitStateProfileType = {
     _id: '',
     email: '',
     name: '',
@@ -15,7 +15,7 @@ export const initState: InitStateType = {
     verified: false,// подтвердил ли почту
     rememberMe: false,
 
-    error: 'error',
+    error: '',
 
 }
 
@@ -44,20 +44,19 @@ export const profileReducer = (state = initState, action: ActionType) => {
     }
 }
 //Actions
-const setProfileDataAC = (profileData: ResponseLogUpType) =>
+const setProfileDataAC = (profileData: ResponseType) =>
     ({type: 'login/SET_PROFILE_DATA', profileData} as const)
 
 //Thunk
 export const getProfileDataTC = () => (dispatch: Dispatch) => {
-    loginAPI.me().then((res) => {
+    authAPI.me().then((res) => {
         dispatch(setProfileDataAC(res.data))
     })
-
 }
 
 //Types
 type ActionType = ReturnType<typeof setProfileDataAC>
-export type InitStateType = {
+export type InitStateProfileType = {
     _id: string;
     email: string;
     name: string;

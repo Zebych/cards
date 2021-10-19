@@ -1,19 +1,10 @@
 import React, {ChangeEvent} from 'react';
 import SuperButton from "../SuperComponents/SuperButton/SuperButton";
-import s from "./login.module.css"
 import SuperInputText from "../SuperComponents/SuperInputText/SuperInputText";
+import styles from "./login.module.scss"
 import SuperCheckbox from "../SuperComponents/SuperCheckbox/SuperCheckbox";
+import {NavLink} from 'react-router-dom';
 
-type LoginPropsType = {
-    logUp: () => void
-    toRegister: () => void
-    changeCheckedBox: (checked: boolean) => void
-    onChangePassword: (pass: string) => void
-    onChangeMail: (mail: string) => void
-    email: string
-    password: string
-    checkBox: boolean
-}
 export const Login: React.FC<LoginPropsType> = ({
                                                     checkBox,
                                                     logUp,
@@ -21,9 +12,9 @@ export const Login: React.FC<LoginPropsType> = ({
                                                     onChangePassword,
                                                     onChangeMail,
                                                     email,
-                                                    password, toRegister
+                                                    password, error,
                                                 }) => {
-
+//сбор данных с инпутов
     const onChangeMailHandler = (e: ChangeEvent<HTMLInputElement>) => {
         return onChangeMail(e.currentTarget.value)
     }
@@ -33,29 +24,42 @@ export const Login: React.FC<LoginPropsType> = ({
     const changeCheckedBoxHandler = (e: ChangeEvent<HTMLInputElement>) => {
         return changeCheckedBox(e.currentTarget.checked)
     }
+//стили для ошибки логинизации
+    const tipError = `${styles.tip} ${error && styles.error}`
 
     return (
-        <div className={s.container}>
-            <div className={s.wrapper}>
-                email:
-                <SuperInputText onChange={onChangeMailHandler} value={email}/>
-                password:
-                <SuperInputText type={"password"} onChange={onChangePasswordHandler} value={password}/>
+        <div className={styles.wrapper}>
+            <h3 className={styles.heading}>It-incubator</h3>
+            <p className={styles.subheading}>cards</p>
 
-                <div>
-                    <span>remember me</span>
-                    <SuperCheckbox checked={checkBox} onChange={changeCheckedBoxHandler}/>
-                </div>
-
-            </div>
-            <span onClick={toRegister}>registration</span>
-            <div className={s.button}>
-                <SuperButton onClick={logUp} buttonName={'Log up'}/>
-            </div>
-
+            <p className={styles.inputWrapper}>
+                <SuperInputText onChange={onChangeMailHandler} value={email} placeholder="Email:"/>
+            </p>
+            <p className={styles.inputWrapper}>
+                <SuperInputText type={"password"} placeholder="Password:" onChange={onChangePasswordHandler}
+                                value={password}/>
+            </p>
+            {error && <p className={tipError}>{error}</p>}
+            <p className={styles.remember}>remember me
+                <SuperCheckbox checked={checkBox} onChange={changeCheckedBoxHandler}/>
+            </p>
+            <SuperButton onClick={logUp} className={styles.send}>Login</SuperButton>
+            <p className={styles.naw}>
+                <NavLink to={'/register'}> Registration</NavLink>
+                <NavLink to={'/recoveryPass'}> Recovery Password</NavLink>
+            </p>
         </div>
     )
 }
-
-
+//Types
+type LoginPropsType = {
+    logUp: () => void
+    changeCheckedBox: (checked: boolean) => void
+    onChangePassword: (pass: string) => void
+    onChangeMail: (mail: string) => void
+    email: string
+    password: string
+    checkBox: boolean
+    error?: string
+}
 

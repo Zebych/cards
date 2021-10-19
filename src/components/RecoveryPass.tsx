@@ -1,5 +1,5 @@
+import {Password} from "./Password/Password";
+
 export const RecoveryPass = () => {
-    return <div>
-        RecoveryPass
-    </div>
+    return <Password/>
 }

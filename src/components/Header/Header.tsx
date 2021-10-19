@@ -2,9 +2,10 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 function Header() {
+    //test
     return (
-        <div>
-            <NavLink to={'/'}> profile </NavLink>
+        <div style={{padding: '50px', marginLeft: '20px'}}>
+            <NavLink to={'/profile'}> profile </NavLink>
             <NavLink to={'/register'}> register </NavLink>
             <NavLink to={'/newPass'}> newPass </NavLink>
             <NavLink to={'/recoveryPass'}> RecoveryPass</NavLink>

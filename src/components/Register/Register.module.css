@@ -3,7 +3,7 @@
     margin: 0 auto;
     padding: 50px;
     background: #e0e0e0;
-    border-radius: 50px;
+    border-radius: 10px;
 }
 
 .wrapper {
@@ -17,8 +17,11 @@
 .wrapper input {
     margin-top: 10px;
 }
-.button {
+.buttons {
     display: flex;
     padding: 10px;
     justify-content: space-evenly;
+}
+.errorMessage {
+    color: red;
 }

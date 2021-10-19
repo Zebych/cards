@@ -1,26 +1,29 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {logUpTC} from "../../store/login-Reducer";
+import {InitStateAuthType, logUpTC} from "../../store/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {AppRootStateType} from "../../store/store";
-import {getProfileDataTC} from "../../store/profile-Reducer";
+import {getProfileDataTC} from "../../store/profile-reducer";
 import {Login} from "./Login";
 
 export const LoginContainer = () => {
     const [email, setMail] = useState('')
     const [password, setPassword] = useState('')
     const [checkBox, setCheckBox] = useState(true)
+    const auth = useSelector<AppRootStateType, InitStateAuthType>(state => state.auth)
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    const isLoggedIn = auth.isLoggedIn
+    const error = auth.errorLogin
+//отслеживание состояния логинизации/если логинизация прошла успешно запросить данные профиля
     useEffect(() => {
         if (!isLoggedIn) {
             return
         }
-        dispatch(getProfileDataTC())
+        dispatch(getProfileDataTC())//
     }, [isLoggedIn])
 
-
-    const onChangeMail = (mail:string) => {
+//set импутов
+    const onChangeMail = (mail: string) => {
         return setMail(mail)
     }
     const onChangePassword = (pass: string) => {
@@ -29,16 +32,14 @@ export const LoginContainer = () => {
     const changeCheckedBox = (checked: boolean) => {
         return setCheckBox(checked)
     }
-
+//button
     const logUp = () => {
         dispatch(logUpTC(email, password, checkBox))
         setMail('')
         setPassword('')
         setCheckBox(true)
     }
-    const toRegister = () => {
-        return <Redirect to={'/register'}/>
-    }
+//Перейти на страницу профиля если прошла логинизация
     if (isLoggedIn) {
         return <Redirect to={'/'}/>
     }
@@ -46,7 +47,7 @@ export const LoginContainer = () => {
     return (
         <>
             <Login
-                toRegister={toRegister}
+                error={error}
                 checkBox={checkBox}
                 password={password}
                 email={email}

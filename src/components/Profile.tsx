@@ -2,16 +2,24 @@ import {useSelector} from "react-redux";
 import {AppRootStateType} from "../store/store";
 import {Redirect} from "react-router-dom";
 import React from "react";
-import {ResponseLogUpType} from "../api/loginAPI";
+import {ResponseType} from "../api/authAPI";
 
 export const Profile = () => {
-    const profileData=useSelector<AppRootStateType,ResponseLogUpType>(state=>state.profile)
+    const profileData = useSelector<AppRootStateType, ResponseType>(state => state.profile)
     const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.auth.isLoggedIn)
+    //проверка логинизации
     if (!isLoggedIn) {
         return <Redirect to={'/login'}/>
     }
     return <div>
-        Profile
-          {profileData._id}{profileData.avatar}{profileData.name}
+        <div>
+            <img src={profileData.avatar} alt="ava"/>
+        </div>
+        <div>
+            {profileData.name}
+        </div>
+        <div>
+            Public card packs: {profileData.publicCardPacksCount}
+        </div>
     </div>
 }

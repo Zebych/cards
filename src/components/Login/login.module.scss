@@ -1,0 +1,130 @@
+.wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px 33px 31px;
+  border-radius: 8px;
+  background-color: #F9F9FE;
+  text-align: center;
+  max-width: 413px;
+
+  .heading {
+    color: #2D2E46;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 39px;
+    margin-bottom: 32px;
+  }
+
+  .subheading {
+    color: #2D2E46;
+    font-weight: 600;
+    font-size: 22px;
+    line-height: 33px;
+    margin-bottom: 57px;
+  }
+
+  .inputWrapper {
+    position: relative;
+    margin-bottom: 25px;
+    overflow: hidden;
+
+    &::after {
+      position: absolute;
+      display: block;
+      content: '';
+      width: 100%;
+      height: 2px;
+      background-color: black;
+      bottom: 0;
+      left: -100%;
+      transition: left .3s ease-in-out;
+    }
+
+    &:hover::after {
+      left: 0;
+    }
+
+    .input {
+      position: relative;
+      width: 100%;
+      background-color: transparent;
+      border-left: none;
+      border-right: none;
+      border-top: none;
+      border-bottom: 1px solid rgba(45, 46, 70, 0.5);
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 24px;
+      color: rgba(45, 46, 70, 0.5);
+      padding-bottom: 4px;
+      outline: none;
+      transition: all .2s ease-in-out;
+
+      &::placeholder {
+        color: rgba(45, 46, 70, 0.5);
+        transition: color .2s ease-in-out;
+      }
+
+      .input:focus {
+        color: rgb(45, 46, 70);
+        border-bottom-color: rgb(45, 46, 70);
+
+        &::placeholder {
+          color: rgb(45, 46, 70);
+        }
+      }
+    }
+  }
+
+  .remember {
+    color: rgba(45, 46, 70, 0.5);
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .tip {
+    font-size: 16px;
+    text-transform: uppercase;
+    background-color: #D7D8EF;
+    color: #21268F;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    font-weight: 700;
+    margin-top: -25px;
+    padding: 10px;
+  }
+
+  .error {
+    color: #fff;
+    background-color: #F1453D;
+  }
+
+  .send {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: 0.01em;
+    color: #ECECF9;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    background: #21268F;
+    box-shadow: 0 4px 18px rgba(33, 38, 143, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    width: 266px;
+    height: 36px;
+    border: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+    margin-bottom: 30px;
+  }
+
+  .naw {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #21268F;
+    text-decoration: none;
+    margin-top: 11px;
+    display: flex;
+    justify-content: space-around;
+  }
+}
