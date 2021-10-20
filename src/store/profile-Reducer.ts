@@ -44,7 +44,7 @@ export const profileReducer = (state = initState, action: ActionType) => {
     }
 }
 //Actions
-const setProfileDataAC = (profileData: ResponseType) =>
+export const setProfileDataAC = (profileData: ResponseType) =>
     ({type: 'login/SET_PROFILE_DATA', profileData} as const)
 
 //Thunk
