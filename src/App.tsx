@@ -11,12 +11,12 @@ import Header from "./components/Header/Header";
 import {LoginContainer} from "./components/Login/LoginContainer";
 import {CheckEmail} from "./components/Password/CheckEmail/CheckEmail";
 import {CreateNewPassword} from "./components/Password/CreateNewPassword/CreateNewPassword";
+import Cards from './components/Card/Card';
 function App() {
     return (
         <div className="App">
             <Header/>
             <Switch>
-                <Route path={'/profile'} exact render={() => <Profile/>}/>
                 <Route path={'/'} exact render={() => <Profile/>}/>
                 <Route path={'/login'} exact render={() => <LoginContainer/>}/>
                 <Route path={'/register'} exact render={() => <Register/>}/>
@@ -26,6 +26,7 @@ function App() {
                 <Route path={'/check-email'} render={() => <CheckEmail/>}/>
                 <Route path={'/set-new-password/:token?'} render={() => <CreateNewPassword />}/>
                 <Route path={'/404'} render={() => <ErrorPage/>}/>
+                <Route path={'/cards'} render={() => <Cards/>}/>
                 <Redirect from={'*'} to={'/404'}/>
             </Switch>
         </div>

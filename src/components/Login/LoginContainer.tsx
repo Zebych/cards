@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {InitStateAuthType, logUpTC} from "../../store/auth-reducer";
 import {Redirect} from "react-router-dom";
 import {AppRootStateType} from "../../store/store";
-import {getProfileDataTC} from "../../store/profile-reducer";
 import {Login} from "./Login";
 
 export const LoginContainer = () => {
@@ -14,13 +13,6 @@ export const LoginContainer = () => {
     const dispatch = useDispatch()
     const isLoggedIn = auth.isLoggedIn
     const error = auth.errorLogin
-//отслеживание состояния логинизации/если логинизация прошла успешно запросить данные профиля
-    useEffect(() => {
-        if (!isLoggedIn) {
-            return
-        }
-        dispatch(getProfileDataTC())//
-    }, [isLoggedIn])
 
 //set импутов
     const onChangeMail = (mail: string) => {

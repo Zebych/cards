@@ -5,15 +5,16 @@ import styles from "./login.module.scss"
 import SuperCheckbox from "../SuperComponents/SuperCheckbox/SuperCheckbox";
 import {NavLink} from 'react-router-dom';
 
-export const Login: React.FC<LoginPropsType> = ({
-                                                    checkBox,
-                                                    logUp,
-                                                    changeCheckedBox,
-                                                    onChangePassword,
-                                                    onChangeMail,
-                                                    email,
-                                                    password, error,
-                                                }) => {
+export const Login: React.FC<LoginPropsType> = (
+    {
+        checkBox,
+        logUp,
+        changeCheckedBox,
+        onChangePassword,
+        onChangeMail,
+        email,
+        password, error,
+    }) => {
 //сбор данных с инпутов
     const onChangeMailHandler = (e: ChangeEvent<HTMLInputElement>) => {
         return onChangeMail(e.currentTarget.value)

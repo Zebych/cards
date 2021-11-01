@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/authAPI";
+import {setProfileDataAC} from "./profile-reducer";
 
 export const authInitState = {
     isLoggedIn: false,
@@ -31,9 +32,8 @@ export const setErrorAC = (error: string) => ({type: 'login/ERROR', error} as co
 //Thunk
 export const logUpTC = (email: string, password: string, rememberMe: boolean) => (dispatch: Dispatch) => {
     authAPI.logUp(email, password, rememberMe).then((res) => {
-            if (res.data._id) {
                 dispatch(setIsLoggedInAC(true))
-            }
+                dispatch(setProfileDataAC(res.data))
         }
     )
         .catch((err) => {

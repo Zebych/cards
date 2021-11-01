@@ -11,6 +11,7 @@ function Header() {
             <NavLink to={'/recoveryPass'}> RecoveryPass</NavLink>
             <NavLink to={'/login'}> login </NavLink>
             <NavLink to={'/testPage'}> test </NavLink>
+            <NavLink to={'/cards'}> cards </NavLink>
         </div>
     )
 }

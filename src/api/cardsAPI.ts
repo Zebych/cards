@@ -7,12 +7,13 @@ const instanceRemote = axios.create({
 })
 
 //api
-export const authAPI = {
-    logUp(email: string, password: string, rememberMe: boolean) {
-        return instanceRemote.post<ResponseType>('/auth/login', {email, password, rememberMe});
+export const cardsAPI = {
+    getCards() {
+        return instanceRemote.get<ResponseCardsType>('/cards/pack');
     },
 }
 
+/*
 export const passwordAPI = {
     forgot(email: string) {
         return instanceRemote.post<ForgotPayloadType, PasswordApiResponseType>('auth/forgot', {
@@ -76,18 +77,28 @@ export type ForgotPayloadType = {
     message: string
 }
 
-export type ResponseType ={
-    _id: string;
-    email: string;
-    name: string;
-    avatar?: string;
-    publicCardPacksCount: number; // количество колод
-
-    created: string;
-    updated: string;
-    isAdmin: boolean;
-    verified: boolean; // подтвердил ли почту
-    rememberMe: boolean;
-
-    error?: string;
-}
+*/
+export type ResponseCardsType ={
+    cardPacks: CardsPacksType[]
+    cardPacksTotalCount: number // количество колод
+    maxCardsCount: number
+    minCardsCount: number
+    page: number // выбранная страница
+    pageCount: number // количество элементов на странице
+ }
+ export type CardsPacksType=[
+     {
+         _id: string
+         user_id: string
+         name: string
+         path: string// папка
+         cardsCount: number
+         grade: number // средняя оценка карточек
+         shots: number // количество попыток			приватные колоды будут
+         rating: number // лайки			только если указать свой
+         type: string // ещё будет "folder" (папка)			user_id
+         created: string
+         updated: string
+         __v: number
+     },
+ ]

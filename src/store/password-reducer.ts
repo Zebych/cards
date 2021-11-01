@@ -19,7 +19,7 @@ export const initialPasswordReducer = {
     isPasswordChanged: false,
 } as InitialPasswordReducerType
 
-export const PasswordReducer = (state: InitialPasswordReducerType = initialPasswordReducer, action: PasswordReducerActionsType): InitialPasswordReducerType => {
+export const passwordReducer = (state: InitialPasswordReducerType = initialPasswordReducer, action: PasswordReducerActionsType): InitialPasswordReducerType => {
     switch (action.type) {
         case 'password/SET-PASSWORD-ERROR':
             return {...state, sendEmailError: action.error}
